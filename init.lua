@@ -174,7 +174,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Move lines in visual mode
 vim.keymap.set('v', '<C-k>', ':m-2<CR>gv=gv')
 vim.keymap.set('v', '<C-j>', ":m'>+<CR>gv=gv")
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -635,7 +634,10 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
+      require('lspconfig').gleam.setup {
+        cmd = { 'gleam', 'lsp' },
+        filetypes = { 'gleam' },
+      }
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
